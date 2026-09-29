@@ -1,0 +1,218 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#07080d">
+  <meta name="description" content="SFEROKOD — CRM, автоматизация и интеграции для бизнеса.">
+  <title>SFEROKOD — CRM · AUTOMATION · INTEGRATION</title>
+  <style>
+    :root{
+      --bg:#07080d; --panel:#0c0e15; --panel2:#10121a; --text:#f4f6f8;
+      --muted:#9297a6; --line:rgba(255,255,255,.10); --lime:#b8ff4a;
+      --violet:#8b5cf6; --cyan:#63e6ff; --max:1240px; --ease:cubic-bezier(.2,.8,.2,1);
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{margin:0;background:var(--bg);color:var(--text);font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;overflow-x:hidden}
+    body:before{content:"";position:fixed;inset:0;pointer-events:none;opacity:.035;background-image:linear-gradient(rgba(255,255,255,.7) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.7) 1px,transparent 1px);background-size:80px 80px;mask-image:linear-gradient(to bottom,black,transparent 75%);z-index:-2}
+    body:after{content:"";position:fixed;width:480px;height:480px;border-radius:50%;pointer-events:none;left:var(--mx,50%);top:var(--my,20%);transform:translate(-50%,-50%);background:radial-gradient(circle,rgba(184,255,74,.08),transparent 65%);filter:blur(12px);z-index:-1}
+    a{color:inherit;text-decoration:none}
+    button{font:inherit}
+    .wrap{width:min(var(--max),calc(100% - 48px));margin:auto}
+    .nav{height:82px;display:flex;align-items:center;justify-content:space-between;position:relative;z-index:10}
+    .brand{font-size:20px;font-weight:850;letter-spacing:-.06em}
+    .brand i{display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--lime);margin-left:3px;box-shadow:0 0 16px var(--lime)}
+    .navlinks{display:flex;gap:30px;color:#a8adba;font-size:13px}
+    .navlinks a{transition:.25s}.navlinks a:hover{color:white}
+    .nav-cta{border:1px solid var(--line);border-radius:999px;padding:11px 17px;font-size:12px;transition:.3s}
+    .nav-cta:hover{border-color:rgba(184,255,74,.5);box-shadow:0 0 30px rgba(184,255,74,.08)}
+    .hero{min-height:calc(100vh - 82px);display:grid;grid-template-columns:1.03fr .97fr;align-items:center;gap:30px;padding:42px 0 100px;position:relative}
+    .hero-copy{position:relative;z-index:2}
+    .eyebrow{display:flex;align-items:center;gap:9px;color:#aeb3c0;font-size:11px;letter-spacing:.15em;text-transform:uppercase;margin-bottom:27px}
+    .eyebrow:before{content:"";width:27px;height:1px;background:var(--lime);box-shadow:0 0 12px var(--lime)}
+    h1{font-size:clamp(55px,7.3vw,104px);line-height:.9;letter-spacing:-.075em;margin:0;max-width:850px}
+    .gradient{background:linear-gradient(100deg,#fff 0%,#dfffb0 34%,#b8ff4a 63%,#9a72ff 100%);-webkit-background-clip:text;background-clip:text;color:transparent}
+    .hero-desc{max-width:600px;color:#a3a8b5;font-size:17px;line-height:1.65;margin:30px 0 34px}
+    .actions{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+    .btn{border-radius:999px;padding:15px 21px;border:1px solid var(--line);font-size:13px;font-weight:700;display:inline-flex;align-items:center;gap:9px;transition:.35s var(--ease)}
+    .btn.primary{background:var(--lime);color:#10140b;border-color:var(--lime);box-shadow:0 12px 35px rgba(184,255,74,.14)}
+    .btn.primary:hover{transform:translateY(-3px);box-shadow:0 18px 45px rgba(184,255,74,.22)}
+    .btn.ghost{color:#d9dce4}.btn.ghost:hover{border-color:rgba(255,255,255,.28);background:rgba(255,255,255,.04)}
+    .hero-meta{display:flex;gap:24px;margin-top:42px;color:#666c7a;font-size:10px;letter-spacing:.13em;text-transform:uppercase}
+    .hero-meta span{display:flex;align-items:center;gap:8px}.hero-meta b{width:5px;height:5px;border-radius:50%;background:#343844}
+
+    .core-stage{height:620px;position:relative;display:grid;place-items:center;perspective:1000px}
+    .core-glow{position:absolute;width:330px;height:330px;border-radius:50%;background:radial-gradient(circle,rgba(184,255,74,.16),rgba(139,92,246,.09) 38%,transparent 68%);filter:blur(20px);animation:pulse 5s ease-in-out infinite}
+    .core{width:190px;height:190px;border-radius:50%;position:relative;display:grid;place-items:center;background:radial-gradient(circle at 35% 30%,#303c26,#13170f 40%,#090b0e 70%);border:1px solid rgba(184,255,74,.45);box-shadow:0 0 0 10px rgba(184,255,74,.025),0 0 65px rgba(184,255,74,.14),inset 0 0 55px rgba(184,255,74,.09);z-index:3}
+    .core:before{content:"";position:absolute;inset:17px;border-radius:50%;border:1px solid rgba(255,255,255,.09)}
+    .core:after{content:"";position:absolute;width:48px;height:48px;border-radius:50%;background:var(--lime);filter:blur(18px);opacity:.55}
+    .core-text{position:relative;z-index:2;font-size:18px;font-weight:900;letter-spacing:-.06em}.core-text small{display:block;text-align:center;font-size:7px;letter-spacing:.22em;color:#a8b28e;margin-top:4px}
+    .orbit{position:absolute;border:1px solid rgba(255,255,255,.09);border-radius:50%;transform:rotateX(65deg) rotateZ(var(--r));animation:spin var(--speed) linear infinite;animation-direction:var(--dir);width:var(--size);height:var(--size)}
+    .orbit:after{content:"";position:absolute;width:7px;height:7px;border-radius:50%;background:var(--lime);box-shadow:0 0 20px var(--lime);left:50%;top:-4px}
+    .orbit.o2{border-color:rgba(139,92,246,.15)} .orbit.o2:after{background:var(--violet);box-shadow:0 0 20px var(--violet)}
+    .orbit.o3{border-color:rgba(99,230,255,.13)} .orbit.o3:after{background:var(--cyan);box-shadow:0 0 20px var(--cyan)}
+    .node{position:absolute;z-index:4;min-width:104px;padding:10px 13px;border:1px solid rgba(255,255,255,.11);background:rgba(10,12,18,.75);backdrop-filter:blur(12px);border-radius:12px;font-size:10px;color:#cdd1da;box-shadow:0 10px 35px rgba(0,0,0,.3);animation:float 5s ease-in-out infinite}
+    .node span{display:block;color:#666c79;font-size:8px;margin-top:4px;letter-spacing:.1em;text-transform:uppercase}
+    .n1{top:15%;right:8%}.n2{bottom:19%;right:0;animation-delay:-1.3s}.n3{bottom:11%;left:9%;animation-delay:-2.5s}.n4{top:27%;left:0;animation-delay:-3.2s}
+    .signal{position:absolute;width:100%;height:1px;background:linear-gradient(90deg,transparent,rgba(184,255,74,.2),transparent);animation:scan 4s ease-in-out infinite;opacity:.5}
+
+    .marquee{border-top:1px solid var(--line);border-bottom:1px solid var(--line);overflow:hidden;padding:17px 0;color:#737987;font-size:11px;letter-spacing:.18em;white-space:nowrap}
+    .track{display:inline-flex;gap:44px;animation:marquee 28s linear infinite}.track b{color:#b5bac5;font-weight:500}.track i{color:var(--lime);font-style:normal}
+    section{padding:145px 0}
+    .section-head{display:grid;grid-template-columns:.8fr 1.2fr;gap:40px;align-items:end;margin-bottom:55px}
+    .kicker{font-size:10px;letter-spacing:.18em;color:var(--lime);text-transform:uppercase}
+    h2{font-size:clamp(40px,5vw,72px);line-height:.95;letter-spacing:-.065em;margin:0}
+    .section-intro{color:#898f9d;line-height:1.7;max-width:540px;font-size:15px}
+    .services{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+    .card{min-height:260px;padding:27px;border:1px solid var(--line);border-radius:20px;background:linear-gradient(145deg,rgba(255,255,255,.035),rgba(255,255,255,.012));position:relative;overflow:hidden;transition:.45s var(--ease)}
+    .card:before{content:"";position:absolute;width:170px;height:170px;border-radius:50%;background:radial-gradient(circle,rgba(184,255,74,.12),transparent 68%);right:-80px;top:-80px;transition:.45s}
+    .card:hover{transform:translateY(-7px);border-color:rgba(184,255,74,.22);box-shadow:0 25px 70px rgba(0,0,0,.25)}.card:hover:before{transform:scale(1.4)}
+    .num{font-size:10px;color:#5e6472;letter-spacing:.14em}.icon{font-size:22px;margin:33px 0 17px}
+    .card h3{font-size:21px;letter-spacing:-.04em;margin:0 0 9px}.card p{font-size:12px;line-height:1.65;color:#7f8592;margin:0;max-width:270px}
+    .process{position:relative;border-top:1px solid var(--line)}
+    .step{display:grid;grid-template-columns:100px 1fr 1fr;gap:35px;padding:36px 0;border-bottom:1px solid var(--line);align-items:start}
+    .step-no{font-size:11px;color:var(--lime);letter-spacing:.12em}.step h3{font-size:30px;letter-spacing:-.045em;margin:0}.step p{margin:0;color:#858b98;font-size:14px;line-height:1.7;max-width:430px}
+    .system{padding-top:80px}.system-box{border:1px solid var(--line);border-radius:28px;min-height:540px;position:relative;overflow:hidden;background:radial-gradient(circle at 50% 50%,rgba(184,255,74,.055),transparent 32%),linear-gradient(145deg,#0b0d13,#08090e)}
+    .system-box:before{content:"";position:absolute;inset:0;background:linear-gradient(90deg,transparent 49.9%,rgba(255,255,255,.035) 50%,transparent 50.1%),linear-gradient(transparent 49.9%,rgba(255,255,255,.035) 50%,transparent 50.1%);background-size:90px 90px}
+    .system-core{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:150px;height:150px;border-radius:50%;display:grid;place-items:center;border:1px solid rgba(184,255,74,.4);box-shadow:0 0 90px rgba(184,255,74,.1);background:#0c100c;z-index:2;font-weight:800;letter-spacing:-.05em}
+    .system-node{position:absolute;border:1px solid var(--line);background:rgba(8,10,15,.8);backdrop-filter:blur(8px);border-radius:14px;padding:14px 17px;font-size:11px;color:#c4c8d1;z-index:3}.system-node span{display:block;color:#676d7b;font-size:8px;margin-top:4px;text-transform:uppercase;letter-spacing:.1em}
+    .sn1{left:8%;top:18%}.sn2{right:8%;top:19%}.sn3{left:11%;bottom:18%}.sn4{right:10%;bottom:18%}
+    .connector{position:absolute;height:1px;background:linear-gradient(90deg,transparent,rgba(184,255,74,.3),transparent);transform-origin:left center;z-index:1}
+    .c1{width:35%;left:18%;top:35%;transform:rotate(21deg)}.c2{width:35%;left:50%;top:35%;transform:rotate(-21deg)}.c3{width:34%;left:19%;top:64%;transform:rotate(-20deg)}.c4{width:34%;left:50%;top:64%;transform:rotate(20deg)}
+    .results{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;border:1px solid var(--line);background:var(--line);border-radius:20px;overflow:hidden}
+    .result{padding:28px;background:var(--bg);min-height:170px}.result strong{font-size:17px;letter-spacing:-.03em}.result p{font-size:12px;color:#777d8a;line-height:1.6;margin:12px 0 0}
+    .cta{padding:145px 0 115px}.cta-box{border:1px solid rgba(184,255,74,.17);border-radius:30px;padding:70px;position:relative;overflow:hidden;background:radial-gradient(circle at 85% 20%,rgba(139,92,246,.13),transparent 35%),radial-gradient(circle at 15% 90%,rgba(184,255,74,.08),transparent 30%),#0a0c11}
+    .cta-box:after{content:"";position:absolute;width:350px;height:350px;border-radius:50%;border:1px solid rgba(184,255,74,.08);right:-120px;bottom:-190px;box-shadow:0 0 0 55px rgba(184,255,74,.025),0 0 0 110px rgba(184,255,74,.015)}
+    .cta h2{max-width:760px}.cta p{color:#858b99;max-width:570px;line-height:1.7;font-size:15px;margin:23px 0 30px}
+    footer{border-top:1px solid var(--line);padding:30px 0 42px;display:flex;justify-content:space-between;align-items:center;color:#666c79;font-size:11px}.footer-brand{color:#e9ebef;font-weight:800;font-size:15px;letter-spacing:-.05em}.footer-right{display:flex;gap:25px}
+    .reveal{opacity:0;transform:translateY(25px);transition:opacity .8s var(--ease),transform .8s var(--ease)}.reveal.in{opacity:1;transform:none}
+    @keyframes spin{to{transform:rotateX(65deg) rotateZ(calc(var(--r) + 360deg))}} @keyframes pulse{50%{transform:scale(1.13);opacity:.7}} @keyframes float{50%{transform:translateY(-9px)}} @keyframes scan{0%,100%{transform:translateY(-220px)}50%{transform:translateY(220px)}} @keyframes marquee{to{transform:translateX(-50%)}}
+    @media(max-width:900px){.hero{grid-template-columns:1fr;padding-top:50px}.core-stage{height:520px}.section-head{grid-template-columns:1fr}.services{grid-template-columns:repeat(2,1fr)}.results{grid-template-columns:repeat(2,1fr)}.step{grid-template-columns:60px 1fr}.step p{grid-column:2}.navlinks{display:none}.cta-box{padding:45px 30px}}
+    @media(max-width:600px){.wrap{width:min(var(--max),calc(100% - 30px))}.nav{height:70px}.nav-cta{padding:9px 13px}.hero{min-height:auto;padding:45px 0 70px}.hero-desc{font-size:15px}.hero-meta{gap:12px;flex-wrap:wrap}.core-stage{height:390px;transform:scale(.82);margin:-25px -20px}.services{grid-template-columns:1fr}.card{min-height:220px}.step{grid-template-columns:45px 1fr;gap:17px}.step h3{font-size:24px}.results{grid-template-columns:1fr}.result{min-height:auto}.system-box{min-height:430px}.system-node{font-size:9px;padding:10px}.sn1{left:4%;top:12%}.sn2{right:4%;top:12%}.sn3{left:4%;bottom:12%}.sn4{right:4%;bottom:12%}.system-core{width:120px;height:120px}.cta{padding:90px 0}.cta-box{padding:38px 24px}.cta h2{font-size:43px}footer{align-items:flex-start;gap:20px;flex-direction:column}.footer-right{flex-wrap:wrap}}
+    @media(prefers-reduced-motion:reduce){*,*:before,*:after{scroll-behavior:auto!important;animation:none!important;transition:none!important}}
+  </style>
+</head>
+<body>
+  <header class="wrap nav">
+    <a class="brand" href="#">SFEROKOD<i></i></a>
+    <nav class="navlinks"><a href="#services">Решения</a><a href="#process">Процесс</a><a href="#system">Система</a><a href="#contact">Контакт</a></nav>
+    <a class="nav-cta" href="#contact">Обсудить проект ↗</a>
+  </header>
+
+  <main>
+    <section class="wrap hero">
+      <div class="hero-copy reveal">
+        <div class="eyebrow">CRM · AUTOMATION · INTEGRATION</div>
+        <h1>Превращаем хаос продаж <span class="gradient">в систему.</span></h1>
+        <p class="hero-desc">Внедряем amoCRM, автоматизируем рутину, подключаем WhatsApp, телефонию и ИИ. Чтобы заявки не терялись, менеджеры не забывали перезванивать, а руководитель видел бизнес в цифрах.</p>
+        <div class="actions"><a class="btn primary" href="#contact">Получить консультацию ↗</a><a class="btn ghost" href="#services">Что мы делаем ↓</a></div>
+        <div class="hero-meta"><span><b></b> B2B automation</span><span><b></b> Kazakhstan</span><span><b></b> Digital systems</span></div>
+      </div>
+
+      <div class="core-stage reveal">
+        <div class="core-glow"></div>
+        <div class="orbit" style="--size:410px;--r:8deg;--speed:22s;--dir:normal"></div>
+        <div class="orbit o2" style="--size:300px;--r:72deg;--speed:17s;--dir:reverse"></div>
+        <div class="orbit o3" style="--size:500px;--r:145deg;--speed:29s;--dir:normal"></div>
+        <div class="core"><div class="core-text">SFEROKOD<small>DIGITAL CORE</small></div></div>
+        <div class="node n1">amoCRM<span>Sales system</span></div>
+        <div class="node n2">WhatsApp<span>Communication</span></div>
+        <div class="node n3">AI / BOT<span>Automation</span></div>
+        <div class="node n4">Telephony<span>Control</span></div>
+        <div class="signal"></div>
+      </div>
+    </section>
+
+    <div class="marquee"><div class="track">
+      <b>AMOCRM</b><i>✦</i><b>WHATSAPP</b><i>✦</i><b>AI</b><i>✦</i><b>TELEPHONY</b><i>✦</i><b>INTEGRATIONS</b><i>✦</i><b>AUTOMATION</b><i>✦</i>
+      <b>AMOCRM</b><i>✦</i><b>WHATSAPP</b><i>✦</i><b>AI</b><i>✦</i><b>TELEPHONY</b><i>✦</i><b>INTEGRATIONS</b><i>✦</i><b>AUTOMATION</b><i>✦</i>
+    </div></div>
+
+    <section class="wrap" id="services">
+      <div class="section-head reveal"><div><div class="kicker">01 / Решения</div><h2>Собираем бизнес<br>в одну систему.</h2></div><p class="section-intro">Не просто настраиваем CRM. Связываем продажи, коммуникации и внутренние процессы так, чтобы система работала на команду, а не добавляла ещё одну таблицу.</p></div>
+      <div class="services">
+        <article class="card reveal"><div class="num">01</div><div class="icon">◉</div><h3>amoCRM</h3><p>Воронка, карточки, задачи, права, автоматизация и аналитика под ваш реальный процесс продаж.</p></article>
+        <article class="card reveal"><div class="num">02</div><div class="icon">⌁</div><h3>WhatsApp</h3><p>Подключаем коммуникацию к CRM, автоматизируем сообщения и повторные касания с клиентом.</p></article>
+        <article class="card reveal"><div class="num">03</div><div class="icon">✦</div><h3>ИИ-боты</h3><p>Квалификация, FAQ, сбор данных и передача диалога менеджеру — без лишней рутины.</p></article>
+        <article class="card reveal"><div class="num">04</div><div class="icon">◌</div><h3>Телефония</h3><p>Звонки, история коммуникаций, контроль обработки и данные внутри CRM.</p></article>
+        <article class="card reveal"><div class="num">05</div><div class="icon">↗</div><h3>Интеграции</h3><p>Сайт, 1С, платежи, формы, мессенджеры, API и внутренние сервисы — в едином контуре.</p></article>
+        <article class="card reveal"><div class="num">06</div><div class="icon">⚡</div><h3>Автоматизация</h3><p>Распределение лидов, задачи, уведомления, контроль этапов и всё, что можно перестать делать вручную.</p></article>
+      </div>
+    </section>
+
+    <section class="wrap" id="process">
+      <div class="section-head reveal"><div><div class="kicker">02 / Процесс</div><h2>От аудита<br>до запуска.</h2></div><p class="section-intro">Сначала разбираемся, как устроен бизнес. Потом проектируем систему и только после этого внедряем инструменты.</p></div>
+      <div class="process">
+        <div class="step reveal"><div class="step-no">01</div><h3>Аудит</h3><p>Изучаем продажи, каналы входящих обращений, точки потери лидов и ручные операции.</p></div>
+        <div class="step reveal"><div class="step-no">02</div><h3>Проектирование</h3><p>Строим воронку, логику автоматизации и архитектуру интеграций до начала настройки.</p></div>
+        <div class="step reveal"><div class="step-no">03</div><h3>Внедрение</h3><p>Настраиваем CRM, каналы коммуникации, роботов, телефонию и необходимые интеграции.</p></div>
+        <div class="step reveal"><div class="step-no">04</div><h3>Запуск</h3><p>Тестируем сценарии, обучаем команду и сопровождаем систему после запуска.</p></div>
+      </div>
+    </section>
+
+    <section class="wrap system" id="system">
+      <div class="section-head reveal"><div><div class="kicker">03 / Digital core</div><h2>Инструменты<br>начинают работать вместе.</h2></div><p class="section-intro">SFEROKOD соединяет точки контакта и внутренние процессы в один управляемый контур.</p></div>
+      <div class="system-box reveal">
+        <div class="connector c1"></div><div class="connector c2"></div><div class="connector c3"></div><div class="connector c4"></div>
+        <div class="system-core">SFEROKOD</div>
+        <div class="system-node sn1">CRM<span>Лиды · Сделки · Задачи</span></div>
+        <div class="system-node sn2">COMMUNICATION<span>WhatsApp · Телефония</span></div>
+        <div class="system-node sn3">AUTOMATION<span>Роботы · Триггеры</span></div>
+        <div class="system-node sn4">DATA<span>1С · Сайт · Платежи</span></div>
+      </div>
+    </section>
+
+    <section class="wrap">
+      <div class="section-head reveal"><div><div class="kicker">04 / Результат</div><h2>Меньше рутины.<br>Больше контроля.</h2></div><p class="section-intro">Не обещаем придуманные проценты роста. Показываем понятный эффект от правильно собранной системы.</p></div>
+      <div class="results">
+        <div class="result reveal"><strong>24/7</strong><p>Автоматическая обработка первичных обращений там, где сценарий можно передать системе.</p></div>
+        <div class="result reveal"><strong>1 CRM</strong><p>Единое пространство для сделок, задач и истории коммуникаций.</p></div>
+        <div class="result reveal"><strong>Меньше ручной работы</strong><p>Рутинные действия запускаются автоматически по заданной логике.</p></div>
+        <div class="result reveal"><strong>Прозрачность</strong><p>Руководитель видит движение лидов и состояние продаж в цифрах.</p></div>
+      </div>
+    </section>
+
+    <section class="wrap cta" id="contact">
+      <div class="cta-box reveal">
+        <div class="kicker">05 / Начнём с проблемы</div>
+        <h2>Расскажите,<br>где сейчас <span class="gradient">болит.</span></h2>
+        <p>Разберём ваш процесс продаж и покажем, что можно автоматизировать, какие интеграции нужны и как собрать всё в одну систему.</p>
+        <a class="btn primary" href="mailto:hello@sferokod.kz">Написать SFEROKOD ↗</a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="wrap">
+    <div class="footer-brand">SFEROKOD</div>
+    <div>CRM · AUTOMATION · INTEGRATION</div>
+    <div class="footer-right"><a href="#services">Решения</a><a href="#process">Процесс</a><a href="#contact">Контакт</a></div>
+  </footer>
+
+  <script>
+    const root=document.documentElement;
+    window.addEventListener('pointermove',e=>{
+      root.style.setProperty('--mx',e.clientX+'px');
+      root.style.setProperty('--my',e.clientY+'px');
+    },{passive:true});
+
+    const io=new IntersectionObserver((entries)=>{
+      entries.forEach((entry,i)=>{
+        if(entry.isIntersecting){
+          entry.target.style.transitionDelay=(Math.min(i%6,5)*70)+'ms';
+          entry.target.classList.add('in');
+          io.unobserve(entry.target);
+        }
+      });
+    },{threshold:.12});
+    document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+
+    document.querySelectorAll('a[href^="#"]').forEach(a=>{
+      a.addEventListener('click',e=>{
+        const id=a.getAttribute('href');
+        if(id.length>1){e.preventDefault();document.querySelector(id)?.scrollIntoView({behavior:'smooth',block:'start'});}
+      });
+    });
+  </script>
+</body>
+</html>
